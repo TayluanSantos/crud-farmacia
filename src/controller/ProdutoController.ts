@@ -9,20 +9,20 @@ export class ProdutoController implements ProdutoRepository {
 
     // CRIAR PRODUTO 
 
-    criarProduto(produto: Produto): void {
+    criar(produto: Produto): void {
         this.listaProdutos.push(produto);
         console.log("\nProduto cadastrado com sucesso!");
     }
 
     // LISTAR TODOS OS PRODUTOS
-    listarTodosOsProdutos(): void {
+    listarTodos(): void {
         for(let produto of this.listaProdutos) {
             produto.visualizar();
         }
     }
 
     // CONSULTAR PRODUTO PELO ID
-    consultarProdutoPorId(idProduto: number): void {
+    consultarPorId(idProduto: number): void {
         let produto = this.buscarNoArray(idProduto);
         if(produto != null){
             produto.visualizar();
@@ -32,24 +32,21 @@ export class ProdutoController implements ProdutoRepository {
     }
     
     // ATUALIZAR PRODUTO
-    atualizarProduto(idProduto:number,novoProduto: Produto): void {
+    atualizar(novoProduto: Produto): void {
 
-        let produto = this.buscarNoArray(idProduto); // Retorna o produto pelo Id
-        
-        if(produto != null){
+        let produto = this.buscarNoArray(novoProduto.id);
 
-            let produtoIndice = this.listaProdutos.indexOf(produto); // Pega o índice do produto
-            this.listaProdutos.splice(produtoIndice,1,novoProduto) // Remove o produto anterior e atualiza pelo novo produto na mesma posição do array
 
-            console.log("\nProduto atualizado!");
-       
+        if (produto !== null) {
+            this.listaProdutos[this.listaProdutos.indexOf(produto)] = novoProduto;
+            console.log("\n O produto foi atualizado!");
         } else {
-            console.log("Produto não encontrado!")
+            console.log("\Produto não encontrada!");
         }
     }
 
     // DELETAR PRODUTO
-    deletarProduto(idProduto: number): void {
+    deletar(idProduto: number): void {
 
         let produto = this.buscarNoArray(idProduto);
 

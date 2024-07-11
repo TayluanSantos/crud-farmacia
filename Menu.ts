@@ -18,7 +18,7 @@ export function main(){
 
         console.log("*****************************************************");
         console.log("                                                     ");
-        console.log("              BANCO DO BRASIL DO BRASIL              ");
+        console.log("                  FARMÁCIA DE TODOS                  ");
         console.log("                                                     ");
         console.log("*****************************************************");
         console.log("                                                     ");
@@ -60,14 +60,14 @@ export function main(){
                     case 1: 
                     console.log("Digite o nome do genérico do medicamento: ");
                     generico = readlineSync.question("");
-                    produtoController.criarProduto(new Medicamento(produtoController.gerarId(),nome,tipo,preco,generico));
+                    produtoController.criar(new Medicamento(produtoController.gerarId(),nome,tipo,preco,generico));
 
                     break;
 
                     case 2: 
                     console.log("Digite o nome da fragrância: ");
                     fragrancia = readlineSync.question("");
-                    produtoController.criarProduto(new Cosmetico(produtoController.gerarId(),nome,tipo,preco,fragrancia));
+                    produtoController.criar(new Cosmetico(produtoController.gerarId(),nome,tipo,preco,fragrancia));
 
                     break;
                 }
@@ -77,7 +77,7 @@ export function main(){
             // LISTAR TODOS 
             case 2:
                 console.log("\nListar todos os Produtos\n");
-                    produtoController.listarTodosOsProdutos();
+                    produtoController.listarTodos();
                     keyPress();
                 break;
 
@@ -85,7 +85,7 @@ export function main(){
             case 3:
                 console.log("\nConsultar Produto por Id\n");
                 id = readlineSync.questionInt("Por favor,digite o id do produto: ");
-                produtoController.consultarProdutoPorId(id);
+                produtoController.consultarPorId(id);
                 keyPress();
                 break;
             
@@ -93,7 +93,12 @@ export function main(){
             case 4:
                 console.log("\nAtualizar Produto\n");
 
-                id = readlineSync.questionInt("Por favor,digite o id do produto: ")
+                id = readlineSync.questionInt("");
+                console.log("\nDigite o id do produto")
+
+                let produto = produtoController.buscarNoArray(id);
+
+                if(produto) {
                 
                 console.log("Digite o nome do produto: ");
                 nome = readlineSync.question("");
@@ -108,17 +113,20 @@ export function main(){
                     case 1: 
                     console.log("Digite o nome do genérico do medicamento: ");
                     generico = readlineSync.question("");
-                    produtoController.atualizarProduto(id,new Medicamento(id,nome,tipo,preco,generico));
+                    produtoController.atualizar(new Medicamento(id,nome,tipo,preco,generico));
 
                     break;
 
                     case 2: 
                     console.log("Digite o nome da fragrância: ");
                     fragrancia = readlineSync.question("");
-                    produtoController.atualizarProduto(id,new Cosmetico(id,nome,tipo,preco,fragrancia));
+                    produtoController.atualizar(new Cosmetico(id,nome,tipo,preco,fragrancia));
 
                     break;
                 }
+            } else {
+                console.log(`O produto de id ${id} não existe!`);
+             }
                 keyPress();
 
                 break;
@@ -127,7 +135,7 @@ export function main(){
             case 5:
                 console.log("\nDeletar um Produto\n");
                 id = readlineSync.questionInt("Por favor,digite o id do produto a ser deletado: ");
-                produtoController.deletarProduto(id);
+                produtoController.deletar(id);
                 break;
      
             default:
@@ -147,7 +155,7 @@ export function sobre(): void {
     console.log("\n*****************************************************");
     console.log("Projeto Desenvolvido por: Tayluan de Jesus dos Santos");
     console.log("Generation Brasil - generation@generation.org");
-    console.log("github.com/conteudoGeneration");
+    console.log("github.com/TayluanSantos");
     console.log("*****************************************************");
 }
 

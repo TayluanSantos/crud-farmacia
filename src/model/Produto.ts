@@ -53,7 +53,9 @@ export abstract class Produto {
     public visualizar(){
 
 		let tipo: string = "";
+
 		switch(this._tipo){
+
 			case 1 : 
 				tipo = "Medicamento";
 				break
@@ -68,7 +70,7 @@ export abstract class Produto {
         console.log("\n************************************");
         console.log(`Id: ${this.id}`);
         console.log(`Nome: ${this.nome}`);
-        console.log(`Tipo: ${this.tipo}`);
+        console.log(`Tipo: ${tipo}`);
         console.log(`Preço: ${this.preco.toFixed(2)}`);
     }
 
